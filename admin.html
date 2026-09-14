@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="el">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin — Χάρις &amp; Τάσος</title>
+    <meta name="description" content="RSVP Dashboard" />
+
+    <!-- PWA -->
+    <link rel="manifest" href="admin-manifest.json" />
+    <meta name="theme-color" content="#7c5c38" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Admin RSVP" />
+
+    <!-- Icon -->
+    <link rel="icon" href="icon.svg" type="image/svg+xml" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap"
+        rel="stylesheet" />
+
+    <!-- Supabase SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+
+    <!-- Wedding config (contains supabase URL & anon key) -->
+    <script src="config.js"></script>
+
+    <link rel="stylesheet" href="admin.css" />
+</head>
+
+<body>
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!--  LOGIN VIEW                                           -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <div id="login-view" class="login-view" aria-label="Σύνδεση διαχειριστή">
+
+        <div class="login-card">
+
+            <div class="login-monogram" aria-hidden="true">X &amp; T</div>
+            <h1 class="login-title">Admin Dashboard</h1>
+            <p class="login-subtitle">Συνδεθείτε για να δείτε τις απαντήσεις RSVP</p>
+
+            <form id="login-form" novalidate>
+                <div class="login-field">
+                    <label for="login-email" class="login-label">Email</label>
+                    <input id="login-email" type="email" class="login-input" required autocomplete="email"
+                        placeholder="your@email.com" />
+                </div>
+                <div class="login-field">
+                    <label for="login-password" class="login-label">Κωδικός</label>
+                    <input id="login-password" type="password" class="login-input" required
+                        autocomplete="current-password" placeholder="••••••••" />
+                </div>
+                <button id="login-btn" type="submit" class="login-btn">Σύνδεση</button>
+                <div id="login-error" class="login-error hidden" role="alert" aria-live="assertive"></div>
+            </form>
+
+        </div>
+
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!--  DASHBOARD VIEW                                       -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <div id="dashboard-view" class="dashboard-view hidden">
+
+        <!-- Header -->
+        <header class="admin-header" role="banner">
+            <div class="admin-header-inner">
+                <span class="admin-logo" aria-label="Χάρις &amp; Τάσος Admin">
+                    <span class="admin-logo-initials">X &amp; T</span>
+                    <span class="admin-logo-label">RSVP Dashboard</span>
+                </span>
+                <div class="admin-header-actions">
+                    <button id="notif-btn" class="btn-notif" aria-live="polite">
+                        🔔 Ειδοποιήσεις
+                    </button>
+                    <button id="logout-btn" class="btn-logout">Αποσύνδεση</button>
+                </div>
+            </div>
+        </header>
+
+        <main class="admin-main" role="main">
+
+            <!-- ── Stats cards ──────────────────────────────── -->
+            <section class="stats-grid" aria-label="Στατιστικά RSVP">
+                <div class="stat-card">
+                    <div class="stat-value" id="stat-total" aria-label="Σύνολο">—</div>
+                    <div class="stat-label">Σύνολο RSVP</div>
+                </div>
+                <div class="stat-card stat-card--attending">
+                    <div class="stat-value" id="stat-attending">—</div>
+                    <div class="stat-label">Θα παρευρεθούν</div>
+                </div>
+                <div class="stat-card stat-card--declined">
+                    <div class="stat-value" id="stat-declined">—</div>
+                    <div class="stat-label">Δεν θα παρευρεθούν</div>
+                </div>
+                <div class="stat-card stat-card--guests">
+                    <div class="stat-value" id="stat-guests">—</div>
+                    <div class="stat-label">Σύνολο καλεσμένων</div>
+                </div>
+            </section>
+
+            <!-- ── Controls ─────────────────────────────────── -->
+            <section class="controls-bar" aria-label="Φίλτρα και αναζήτηση">
+                <input id="search-input" type="search" class="search-input" placeholder="Αναζήτηση ονόματος ή email…"
+                    aria-label="Αναζήτηση" />
+                <div class="filter-tabs" role="group" aria-label="Φίλτρο παρουσίας">
+                    <button class="filter-tab active" data-filter="all">Όλα</button>
+                    <button class="filter-tab" data-filter="yes">✓ Θα έρθουν</button>
+                    <button class="filter-tab" data-filter="no">✗ Δεν θα έρθουν</button>
+                </div>
+                <button id="export-btn" class="btn-export" aria-label="Εξαγωγή σε CSV">
+                    ↓ CSV
+                </button>
+            </section>
+
+            <!-- ── RSVP table ────────────────────────────────── -->
+            <section class="table-section" aria-label="Λίστα RSVP">
+                <div class="table-wrap">
+                    <table class="rsvp-table" id="rsvp-table" aria-label="Απαντήσεις RSVP">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Ημερομηνία</th>
+                                <th scope="col">Όνομα</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Παρουσία</th>
+                                <th scope="col">Άτομα</th>
+                                <th scope="col">Διατροφή</th>
+                                <th scope="col">Μήνυμα</th>
+                            </tr>
+                        </thead>
+                        <tbody id="rsvp-tbody">
+                            <tr id="loading-row">
+                                <td colspan="8" class="table-loading" aria-live="polite">
+                                    <span class="loading-spinner" aria-hidden="true"></span>
+                                    Φόρτωση δεδομένων…
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p id="no-results" class="no-results hidden" role="status">
+                    Δεν βρέθηκαν αποτελέσματα για την αναζήτησή σας.
+                </p>
+                <p id="table-count" class="table-count"></p>
+            </section>
+
+            <!-- ── Live indicator ───────────────────────────── -->
+            <div class="live-badge" id="live-badge" aria-live="polite">
+                <span class="live-dot" aria-hidden="true"></span>
+                Live
+            </div>
+
+        </main>
+
+        <!-- Toast notification -->
+        <div id="toast" class="toast hidden" role="status" aria-live="polite" aria-atomic="true"></div>
+
+    </div>
+
+    <script src="admin.js"></script>
+
+</body>
+
+</html>
