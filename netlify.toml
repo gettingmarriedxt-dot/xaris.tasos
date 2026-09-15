@@ -23,11 +23,11 @@
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
 
-# config.js: 1-hour cache — short enough to pick up content changes quickly
+# config.js: always revalidate so image and content changes are picked up promptly
 [[headers]]
   for = "/config.js"
   [headers.values]
-    Cache-Control = "public, max-age=3600"
+    Cache-Control = "public, max-age=0, must-revalidate"
 
 # CSS: 1-week cache
 [[headers]]

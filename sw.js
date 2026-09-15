@@ -5,7 +5,7 @@
 
 'use strict';
 
-const CACHE_NAME = 'wedding-v1';
+const CACHE_NAME = 'wedding-v2';
 
 // No install-time precaching — files are cached lazily on first request (see fetch handler).
 // Precaching would re-fetch every file a second time on each new visitor, doubling requests.
