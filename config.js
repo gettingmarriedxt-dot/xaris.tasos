@@ -100,7 +100,7 @@ const WEDDING = {
         {
             name: "Δήμητρα Γκότζια",     // ← UPDATE
             role: "Μάρτυρας",             // ← UPDATE
-            image: "images/IMG_20260914_163715.jpg",
+            image: "images/dimitra.jpg",
             alt: "Μάρτυρας 2"
         }
     ],
