@@ -56,8 +56,8 @@ const WEDDING = {
             // dateIso: omit to use the wedding date; set only if ceremony is on a different day
             startTime: "19:45",
             endTime: "-",
-            address: "Πλατεία Κοραή 1, 185 35 Πειραιάς",  // ← UPDATE
-            mapUrl: "https://share.google/kgLDLc2f2bNyf9MNH",  // ← UPDATE
+            address: "Φίλωνος 29, Πειραιάς 185 31",  // ← UPDATE
+            mapUrl: "https://maps.app.goo.gl/F3jJxko9UXNHYSkq5",  // ← UPDATE
             description: "Join us for our wedding ceremony."
         },
         {
