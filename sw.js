@@ -5,7 +5,7 @@
 
 'use strict';
 
-const CACHE_NAME = 'wedding-v3';
+const CACHE_NAME = 'wedding-v4';
 
 // No install-time precaching — files are cached lazily on first request (see fetch handler).
 // Precaching would re-fetch every file a second time on each new visitor, doubling requests.
@@ -34,6 +34,21 @@ self.addEventListener('fetch', event => {
 
     // Always go to network for Supabase API calls
     if (url.hostname.includes('supabase.co')) return;
+
+    // Revalidate editable site config and photos, then refresh the offline copy.
+    if (url.origin === self.location.origin &&
+        (url.pathname === '/config.js' || url.pathname.startsWith('/images/'))) {
+        event.respondWith(
+            fetch(event.request, { cache: 'no-cache' }).then(response => {
+                if (response && response.status === 200) {
+                    const clone = response.clone();
+                    caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
+                }
+                return response;
+            }).catch(() => caches.match(event.request))
+        );
+        return;
+    }
 
     // Cache-first for same-origin static assets
     if (url.origin === self.location.origin) {

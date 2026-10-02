@@ -1,6 +1,6 @@
 # Xaris & Tasos — Wedding Website
 
-A production-quality wedding microsite. Built with plain HTML, CSS, and JavaScript — no installation required to view. Deployed via Netlify in minutes.
+A production-quality wedding microsite. Built with plain HTML, CSS, and JavaScript — no installation required to view. Deployed as a static site on Cloudflare Pages.
 
 ---
 
@@ -117,13 +117,14 @@ supabase: {
 
 ---
 
-## Deployment (Netlify)
+## Deployment (Cloudflare Pages)
 
-**Simplest:** Go to [app.netlify.com](https://app.netlify.com), sign up free, drag your project folder onto the dashboard. Done — live in 60 seconds.
+1. Push the project to a GitHub repository.
+2. In the Cloudflare dashboard, open **Workers & Pages** and create a Pages project connected to that repository.
+3. Leave the build command empty and set the build output directory to `.` (the repository root).
+4. Deploy. Cloudflare Pages reads `_headers` for cache and security headers.
 
-**With Git:** Push to a private GitHub repo → Netlify → Import from Git → auto-deploys on every update.
-
-**Custom domain:** Buy `xarisandtasos.com` or `.wedding` (~€10/year), add it in Netlify → Domain Management → HTTPS is automatic.
+For a custom domain, open the Pages project's **Custom domains** settings and follow Cloudflare's DNS instructions.
 
 ---
 
@@ -953,7 +954,6 @@ The final project should be deployable easily.
 Preferred:
 
 * Vercel
-* Netlify
 * Cloudflare Pages
 
 If using Next.js, configure it correctly.
