@@ -34,7 +34,7 @@ const WEDDING = {
     // ── Couple portrait (full-width section) ─────────────────
     //    Replace with your own photo: "images/couple.jpg"
     couplePhoto: {
-        image: "images/IMG_20260914_163132.jpg",
+        image: "images/couple.jpg",
         alt: "Χάρις και Τάσος"
     },
 
