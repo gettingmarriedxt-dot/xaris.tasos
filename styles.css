@@ -1123,16 +1123,15 @@ h4 {
 
 /* ── COUPLE PHOTO ─────────────────────────────────────────── */
 .couple-photo-section {
-    padding: clamp(5rem, 10vw, 9rem) 0 clamp(5rem, 10vw, 9rem);
+    padding: clamp(3rem, 6vw, 5rem) 0;
     background: var(--bg);
 }
 
 .couple-portrait-frame {
     position: relative;
-    width: min(76vw, 620px);
-    aspect-ratio: 4 / 5;
-    margin: clamp(2rem, 5vw, 4rem) auto 0;
-    padding: clamp(16px, 2.5vw, 28px);
+    width: min(40vw, 400px);
+    margin: clamp(1.5rem, 3vw, 2.5rem) auto 0;
+    padding: clamp(10px, 1.4vw, 16px);
     border: 1px solid var(--accent);
     outline: 1px solid rgba(155, 123, 84, 0.48);
     outline-offset: 6px;
@@ -1159,8 +1158,8 @@ h4 {
 
 .couple-photo-img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    height: auto;
+    object-fit: contain;
     object-position: center;
 }
 
@@ -1169,7 +1168,7 @@ h4 {
     align-items: center;
     justify-content: center;
     gap: 0.8rem;
-    margin: clamp(2rem, 4vw, 3rem) auto 0;
+    margin: clamp(1.5rem, 3vw, 2.5rem) auto 0;
     color: var(--accent-dk);
     font-family: var(--serif);
     font-size: clamp(1.5rem, 3vw, 2rem);
@@ -1184,7 +1183,7 @@ h4 {
 
 @media (max-width: 600px) {
     .couple-portrait-frame {
-        width: min(86vw, 440px);
+        width: min(86vw, 360px);
     }
 }
 
