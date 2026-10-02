@@ -56,7 +56,7 @@ const WEDDING = {
             startTime: "19:45",
             endTime: "-",
             address: "Πλατεία Κοραή 1, 185 35 Πειραιάς",  // ← UPDATE
-            mapUrl: "https://maps.app.goo.gl/5d34Wj4d9uzv8nPh6",  // ← UPDATE
+            mapUrl: "https://share.google/kgLDLc2f2bNyf9MNH",  // ← UPDATE
             description: "Join us for our wedding ceremony."
         },
         {
