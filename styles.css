@@ -1123,17 +1123,69 @@ h4 {
 
 /* ── COUPLE PHOTO ─────────────────────────────────────────── */
 .couple-photo-section {
-    padding: clamp(5rem, 10vw, 9rem) 0 0;
+    padding: clamp(5rem, 10vw, 9rem) 0 clamp(5rem, 10vw, 9rem);
     background: var(--bg);
 }
 
+.couple-portrait-frame {
+    position: relative;
+    width: min(76vw, 620px);
+    aspect-ratio: 4 / 5;
+    margin: clamp(2rem, 5vw, 4rem) auto 0;
+    padding: clamp(16px, 2.5vw, 28px);
+    border: 1px solid var(--accent);
+    outline: 1px solid rgba(155, 123, 84, 0.48);
+    outline-offset: 6px;
+    background: linear-gradient(135deg, #fffefa, #eee5d8);
+    box-shadow: 0 24px 65px rgba(35, 31, 26, 0.18), 0 5px 14px rgba(35, 31, 26, 0.08);
+}
+
+.couple-portrait-frame::after {
+    position: absolute;
+    inset: 7px;
+    border: 1px solid rgba(155, 123, 84, 0.32);
+    background:
+        linear-gradient(var(--accent-light), var(--accent-light)) left 0 top 0 / 18px 1px no-repeat,
+        linear-gradient(var(--accent-light), var(--accent-light)) left 0 top 0 / 1px 18px no-repeat,
+        linear-gradient(var(--accent-light), var(--accent-light)) right 0 top 0 / 18px 1px no-repeat,
+        linear-gradient(var(--accent-light), var(--accent-light)) right 0 top 0 / 1px 18px no-repeat,
+        linear-gradient(var(--accent-light), var(--accent-light)) left 0 bottom 0 / 18px 1px no-repeat,
+        linear-gradient(var(--accent-light), var(--accent-light)) left 0 bottom 0 / 1px 18px no-repeat,
+        linear-gradient(var(--accent-light), var(--accent-light)) right 0 bottom 0 / 18px 1px no-repeat,
+        linear-gradient(var(--accent-light), var(--accent-light)) right 0 bottom 0 / 1px 18px no-repeat;
+    content: "";
+    pointer-events: none;
+}
+
 .couple-photo-img {
-    width: 60%;
-    max-height: 80vh;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
     object-position: center;
-    display: block;
-    margin: clamp(2rem, 5vw, 4rem) auto 0;
+}
+
+.couple-portrait-caption {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    margin: clamp(2rem, 4vw, 3rem) auto 0;
+    color: var(--accent-dk);
+    font-family: var(--serif);
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    line-height: 1;
+}
+
+.couple-portrait-caption span {
+    color: var(--accent-light);
+    font-family: var(--sans);
+    font-size: 0.65rem;
+}
+
+@media (max-width: 600px) {
+    .couple-portrait-frame {
+        width: min(86vw, 440px);
+    }
 }
 
 /* ── WITNESSES ────────────────────────────────────────────── */
