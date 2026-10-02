@@ -52,7 +52,7 @@ const WEDDING = {
         {
             type: "ceremony",
             label: "ΤΕΛΕΤΗ",
-            venue: "ΔΗΜΑΡΧΕΙΟ ΠΕΙΡΑΙΑ",              // ← UPDATE
+            venue: "Δημοτική Πινακοθήκη Πειραιά",              // ← UPDATE
             // dateIso: omit to use the wedding date; set only if ceremony is on a different day
             startTime: "19:45",
             endTime: "-",
