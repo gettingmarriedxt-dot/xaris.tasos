@@ -476,8 +476,8 @@ h4 {
 
 .hero-date {
     font-family: var(--sans);
-    font-size: clamp(1.1rem, 2.2vw, 1.125rem);
-    font-weight: 600;
+    font-size: clamp(1rem, 2.2vw, 1.125rem);
+    font-weight: 500;
     letter-spacing: 0.22em;
     text-transform: uppercase;
     color: var(--white);
@@ -507,7 +507,7 @@ h4 {
 }
 
 .hero-scroll-text {
-    font-size: 2rem;
+    font-size: 0.55rem;
     letter-spacing: 0.25em;
     text-transform: uppercase;
 }
@@ -524,7 +524,7 @@ h4 {
 
 .hero-countdown-intro {
     font-family: var(--serif);
-    font-size: 1.2rem;
+    font-size: 0.875rem;
     font-style: italic;
     color: rgba(255, 255, 255, 0.6);
     letter-spacing: 0.04em;
@@ -1123,68 +1123,17 @@ h4 {
 
 /* ── COUPLE PHOTO ─────────────────────────────────────────── */
 .couple-photo-section {
-    padding: clamp(3rem, 6vw, 5rem) 0;
+    padding: clamp(5rem, 10vw, 9rem) 0 0;
     background: var(--bg);
 }
 
-.couple-portrait-frame {
-    position: relative;
-    width: min(40vw, 400px);
-    margin: clamp(1.5rem, 3vw, 2.5rem) auto 0;
-    padding: clamp(10px, 1.4vw, 16px);
-    border: 1px solid var(--accent);
-    outline: 1px solid rgba(155, 123, 84, 0.48);
-    outline-offset: 6px;
-    background: linear-gradient(135deg, #fffefa, #eee5d8);
-    box-shadow: 0 24px 65px rgba(35, 31, 26, 0.18), 0 5px 14px rgba(35, 31, 26, 0.08);
-}
-
-.couple-portrait-frame::after {
-    position: absolute;
-    inset: 7px;
-    border: 1px solid rgba(155, 123, 84, 0.32);
-    background:
-        linear-gradient(var(--accent-light), var(--accent-light)) left 0 top 0 / 18px 1px no-repeat,
-        linear-gradient(var(--accent-light), var(--accent-light)) left 0 top 0 / 1px 18px no-repeat,
-        linear-gradient(var(--accent-light), var(--accent-light)) right 0 top 0 / 18px 1px no-repeat,
-        linear-gradient(var(--accent-light), var(--accent-light)) right 0 top 0 / 1px 18px no-repeat,
-        linear-gradient(var(--accent-light), var(--accent-light)) left 0 bottom 0 / 18px 1px no-repeat,
-        linear-gradient(var(--accent-light), var(--accent-light)) left 0 bottom 0 / 1px 18px no-repeat,
-        linear-gradient(var(--accent-light), var(--accent-light)) right 0 bottom 0 / 18px 1px no-repeat,
-        linear-gradient(var(--accent-light), var(--accent-light)) right 0 bottom 0 / 1px 18px no-repeat;
-    content: "";
-    pointer-events: none;
-}
-
 .couple-photo-img {
-    width: 100%;
-    height: auto;
-    object-fit: contain;
+    width: 60%;
+    max-height: 80vh;
+    object-fit: cover;
     object-position: center;
-}
-
-.couple-portrait-caption {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.8rem;
-    margin: clamp(1.5rem, 3vw, 2.5rem) auto 0;
-    color: var(--accent-dk);
-    font-family: var(--serif);
-    font-size: clamp(1.5rem, 3vw, 2rem);
-    line-height: 1;
-}
-
-.couple-portrait-caption span {
-    color: var(--accent-light);
-    font-family: var(--sans);
-    font-size: 0.65rem;
-}
-
-@media (max-width: 600px) {
-    .couple-portrait-frame {
-        width: min(86vw, 360px);
-    }
+    display: block;
+    margin: clamp(2rem, 5vw, 4rem) auto 0;
 }
 
 /* ── WITNESSES ────────────────────────────────────────────── */
