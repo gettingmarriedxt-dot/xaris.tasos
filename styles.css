@@ -477,7 +477,7 @@ h4 {
 .hero-date {
     font-family: var(--sans);
     font-size: clamp(1.9rem, 2.2vw, 1.125rem);
-    font-weight: 500;
+    font-weight: 600;
     letter-spacing: 0.22em;
     text-transform: uppercase;
     color: var(--white);
