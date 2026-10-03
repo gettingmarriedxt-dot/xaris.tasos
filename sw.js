@@ -5,7 +5,7 @@
 
 'use strict';
 
-const CACHE_NAME = 'wedding-v5';
+const CACHE_NAME = 'wedding-v6';
 
 // No install-time precaching — files are cached lazily on first request (see fetch handler).
 // Precaching would re-fetch every file a second time on each new visitor, doubling requests.
@@ -34,6 +34,9 @@ self.addEventListener('fetch', event => {
 
     // Always go to network for Supabase API calls
     if (url.hostname.includes('supabase.co')) return;
+
+    // Live Dropbox gallery responses must not be served from the offline cache.
+    if (url.origin === self.location.origin && url.pathname.startsWith('/api/')) return;
 
     // Revalidate editable site config and photos, then refresh the offline copy.
     if (url.origin === self.location.origin &&

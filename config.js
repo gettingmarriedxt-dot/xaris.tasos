@@ -73,12 +73,6 @@ const WEDDING = {
         }
     ],
 
-    // ── Gallery photo ─────────────────────────────────────────
-    //    One photo shown full-width. Replace with: "images/gallery.jpg"
-    gallery: [
-        { src: "https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=1200&q=80", alt: "Χάρις και Τάσος" }
-    ],
-
     // ── Travel Information ───────────────────────────────────
     travel: {
         enabled: true,
@@ -115,10 +109,7 @@ const WEDDING = {
     },
 
     // ── Guest Photo Upload ───────────────────────────────────
-    //    Create a Google Form with a File Upload question, then paste
-    //    its share URL here. Photos land directly in your Google Drive.
-    //    How to set up: forms.google.com → New Form → Add question →
-    //    File upload → Share → Copy link → paste below.
+    //    Dropbox File Request; the gallery reads the configured shared folder.
     photoUpload: {
         enabled: true,
         driveUrl: "https://www.dropbox.com/request/gikx637z5t5l8x78bjnq",
