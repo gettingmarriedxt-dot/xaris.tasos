@@ -126,6 +126,17 @@ supabase: {
 
 For a custom domain, open the Pages project's **Custom domains** settings and follow Cloudflare's DNS instructions.
 
+### Automatic Dropbox Gallery
+
+The gallery reads image files from the Dropbox shared folder URL in `config.js` (`photoUpload.viewUrl`). It uses a Cloudflare Pages Function, so Dropbox credentials stay server-side.
+
+1. In the [Dropbox App Console](https://www.dropbox.com/developers/apps), create a **Scoped access** app with **Full Dropbox** access. Enable the read-only `files.metadata.read` and `files.content.read` permissions.
+2. Authorize the app using the Dropbox account that owns the shared photo folder. Follow the [Dropbox OAuth code flow](https://developers.dropbox.com/oauth-guide) with `token_access_type=offline` and save the refresh token securely.
+3. In Cloudflare Pages, open **Settings → Variables and Secrets**. Add `DROPBOX_APP_KEY`, `DROPBOX_APP_SECRET`, `DROPBOX_REFRESH_TOKEN`, and `DROPBOX_SHARED_FOLDER_URL` as secrets. Set `DROPBOX_SHARED_FOLDER_URL` to the same folder URL as `photoUpload.viewUrl` in `config.js`.
+4. Ensure the Dropbox File Request saves photos into that shared folder, then deploy the site from the Git-connected Pages project. The gallery scans the shared folder's top level and displays supported image files automatically.
+
+Do not put Dropbox tokens in `config.js` or commit them. The page needs to be hosted on Cloudflare Pages; opening `index.html` directly from disk cannot run Pages Functions.
+
 ---
 
 ## Checklist before going live

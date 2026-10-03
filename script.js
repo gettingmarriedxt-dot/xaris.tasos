@@ -303,11 +303,49 @@ let galleryImages = [];
 // ── GALLERY SLIDER ────────────────────────────────────────────
 let currentIndex = 0;
 
-function renderGallery() {
-    const img = WEDDING.gallery[0];
-    if (!img) return;
-    const el = document.getElementById('gallery-single-img');
-    if (el) { el.src = img.src; el.alt = img.alt; }
+async function renderGallery() {
+    const grid = document.getElementById('gallery-grid');
+    const status = document.getElementById('gallery-status');
+    if (!grid || !status) return;
+
+    if (location.protocol === 'file:') {
+        status.textContent = 'Η αυτόματη συλλογή φωτογραφιών λειτουργεί στην online έκδοση του site, όχι σε τοπικό αρχείο.';
+        return;
+    }
+
+    try {
+        const response = await fetch('/api/gallery', { headers: { Accept: 'application/json' } });
+        if (response.status === 503) {
+            status.textContent = 'Η σύνδεση Dropbox δεν έχει ρυθμιστεί ακόμα στο Cloudflare.';
+            return;
+        }
+        if (!response.ok) throw new Error('Gallery request failed');
+
+        const { images } = await response.json();
+        if (!Array.isArray(images) || images.length === 0) {
+            status.textContent = 'Οι φωτογραφίες θα εμφανιστούν εδώ μόλις ανέβουν.';
+            return;
+        }
+
+        const fragment = document.createDocumentFragment();
+        for (const photo of images) {
+            const figure = document.createElement('figure');
+            figure.className = 'gallery-item';
+
+            const image = document.createElement('img');
+            image.src = photo.src;
+            image.alt = photo.name || 'Φωτογραφία γάμου';
+            image.loading = 'lazy';
+            image.decoding = 'async';
+            figure.append(image);
+            fragment.append(figure);
+        }
+
+        grid.replaceChildren(fragment);
+        status.hidden = true;
+    } catch {
+        status.textContent = 'Η συλλογή φωτογραφιών δεν είναι διαθέσιμη αυτή τη στιγμή.';
+    }
 }
 
 // initLightbox kept as no-op so call in DOMContentLoaded doesn't error
